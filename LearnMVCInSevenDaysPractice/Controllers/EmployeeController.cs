@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace LearnMVCInSevenDaysPractice.Controllers
 {
-    public class TestController : Controller
+    public class EmployeeController : Controller
     {
         // GET: Test
         public string GetString()
@@ -16,7 +16,7 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 			return "What Up";
 		}
 
-		public ActionResult GetView()
+		public ActionResult Index()
 		{
 
 
