@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace LearnMVCInSevenDaysPractice.Controllers
 {
-    public class EmployeeController : Controller
-    {
-        // GET: Test
-        public string GetString()
+	public class EmployeeController : Controller
+	{
+		// GET: Test
+		public string GetString()
 		{
 			return "What Up";
 		}
@@ -25,7 +25,7 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 			EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
 			List<Employee> employees = empBal.GetEmployees();
 
-			List < EmployeeViewModel > empViewModels = new List<EmployeeViewModel>();
+			List<EmployeeViewModel> empViewModels = new List<EmployeeViewModel>();
 
 			foreach (Employee emp in employees)
 			{
@@ -43,8 +43,36 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 				empViewModels.Add(empViewModel);
 			}
 			employeeListViewModel.Employees = empViewModels;
-			employeeListViewModel.UserName = "Admin";
-			return View("MyView", employeeListViewModel);
+
+			return View("Index", employeeListViewModel);
 		}
-    }
+
+		public ActionResult AddNew()
+		{
+			return View("CreateEmployee");
+		}
+
+		public ActionResult SaveEmployee(Employee e, string BtnSubmit)
+		{
+
+			switch (BtnSubmit)
+			{
+				case "Save Employee":
+					if (ModelState.IsValid)
+					{
+						var empbal = new EmployeeBusinessLayer();
+						empbal.SaveEmployee(e);
+						return RedirectToAction("Index");
+					}
+					else
+					{
+						return View("CreateEmployee");
+					}
+				case "Cancel":
+					return RedirectToAction("Index");
+
+			}
+			return new EmptyResult();
+		}
+	}
 }
