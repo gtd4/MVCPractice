@@ -15,12 +15,12 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 		{
 			return "What Up";
 		}
-
+		[Authorize]
 		public ActionResult Index()
 		{
 
-
 			var employeeListViewModel = new EmployeeListViewModel();
+			employeeListViewModel.UserName = User.Identity.Name;
 
 			EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
 			List<Employee> employees = empBal.GetEmployees();
@@ -49,7 +49,7 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 
 		public ActionResult AddNew()
 		{
-			return View("CreateEmployee");
+			return View("CreateEmployee", new CreateEmployeeViewModel());
 		}
 
 		public ActionResult SaveEmployee(Employee e, string BtnSubmit)
@@ -66,7 +66,18 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 					}
 					else
 					{
-						return View("CreateEmployee");
+						var vm = new CreateEmployeeViewModel();
+						vm.FirstName = e.FirstName;
+						vm.LastName = e.LastName;
+						if(e.Salary > 0)
+						{
+							vm.Salary = e.Salary.ToString();
+						}
+						else
+						{
+							vm.Salary = ModelState["Salary"].Value.AttemptedValue;
+						}
+						return View("CreateEmployee", vm);
 					}
 				case "Cancel":
 					return RedirectToAction("Index");

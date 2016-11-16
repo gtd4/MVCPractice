@@ -21,5 +21,14 @@ namespace LearnMVCInSevenDaysPractice.Models
 			salesDal.SaveChanges();
 			return e;
 		}
+
+		public bool IsValidUser(UserDetails u)
+		{
+			if (u.UserName == "Admin" && u.Password == "Admin")
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 }

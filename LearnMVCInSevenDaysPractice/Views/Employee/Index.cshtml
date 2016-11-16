@@ -12,7 +12,11 @@
 </head>
 <body>
     <div>
-       
+        <div style="text-align:right">
+            Hello, @Model.UserName
+            <a href="@Url.Action("Logout", "Authentication")">Logout</a>
+        </div>
+
         <hr />
         Welcome to MVC 5 Step By Step Learning <br />
         <b>Employee Details</b> <br />

@@ -22,7 +22,7 @@ namespace LearnMVCInSevenDaysPractice.Validations
 
 				}
 			}
-			return base.IsValid(value, validationContext);
+			return ValidationResult.Success;
 		}
 	}
 }
