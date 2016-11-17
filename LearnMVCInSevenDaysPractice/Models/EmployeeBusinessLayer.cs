@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using LearnMVCInSevenDaysPractice.DataAccessLayer;
+using LearnMVCInSevenDays.Models;
 
 namespace LearnMVCInSevenDaysPractice.Models
 {
@@ -22,13 +23,17 @@ namespace LearnMVCInSevenDaysPractice.Models
 			return e;
 		}
 
-		public bool IsValidUser(UserDetails u)
+		public UserStatus GetUserValidity(UserDetails u)
 		{
 			if (u.UserName == "Admin" && u.Password == "Admin")
 			{
-				return true;
+				return UserStatus.AuthenticatedAdmin;
 			}
-			return false;
+			else if(u.UserName.Equals("Sukesh") && u.Password.Equals("Sukesh"))
+			{
+				return UserStatus.AuthenticatedUser;
+			}
+			return UserStatus.NonAuthenticatedUser;
 		}
 	}
 }

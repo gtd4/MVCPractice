@@ -1,4 +1,5 @@
-﻿using LearnMVCInSevenDaysPractice.Models;
+﻿using LearnMVCInSevenDays.Models;
+using LearnMVCInSevenDaysPractice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,25 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 			if (ModelState.IsValid)
 			{
 				var bal = new EmployeeBusinessLayer();
-				if (bal.IsValidUser(u))
+				var status = bal.GetUserValidity(u);
+				var isAdmin = false;
+				if (status == UserStatus.AuthenticatedAdmin)
 				{
-					FormsAuthentication.SetAuthCookie(u.UserName, false);
-					return RedirectToAction("Index", "Employee");
+					isAdmin = true;
+				}else if(status == UserStatus.AuthenticatedUser)
+				{
+					isAdmin = false;
+				}
+				else
+				{
+					ModelState.AddModelError("CredentialError", "Invalid Username or Password");
+					return View("Login");
 				}
 
-				ModelState.AddModelError("CredentialError", "Invalid Username or Password");
-				return View("Login");
+				FormsAuthentication.SetAuthCookie(u.UserName, false);
+				Session["IsAdmin"] = isAdmin;
+				return RedirectToAction("Index", "Employee");
+				
 			}
 			else
 			{

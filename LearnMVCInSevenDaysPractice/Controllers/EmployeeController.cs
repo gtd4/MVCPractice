@@ -43,6 +43,9 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 				empViewModels.Add(empViewModel);
 			}
 			employeeListViewModel.Employees = empViewModels;
+			employeeListViewModel.FooterData = new FooterViewModel();
+			employeeListViewModel.FooterData.CompanyName = "StepByStepschools";
+			employeeListViewModel.FooterData.Year = DateTime.Now.Year.ToString();
 
 			return View("Index", employeeListViewModel);
 		}
@@ -83,6 +86,16 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 					return RedirectToAction("Index");
 
 			}
+			return new EmptyResult();
+		}
+
+		public ActionResult GetAddNewLink()
+		{
+			if(Convert.ToBoolean(Session["IsAdmin"]))
+			{
+				return PartialView("AddNewLink");
+			}
+
 			return new EmptyResult();
 		}
 	}

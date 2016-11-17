@@ -20,7 +20,7 @@
         <hr />
         Welcome to MVC 5 Step By Step Learning <br />
         <b>Employee Details</b> <br />
-        <a href="@Url.Action("AddNew", "Employee")">Add New</a><br />
+        @{Html.RenderAction("GetAddNewLink"); }
         <hr />
         @foreach (var item in Model.Employees)
         {
@@ -35,5 +35,8 @@
             <hr />
         }
     </div>
+    @{ 
+        Html.RenderPartial("Footer", Model.FooterData);
+    }
 </body>
 </html>
