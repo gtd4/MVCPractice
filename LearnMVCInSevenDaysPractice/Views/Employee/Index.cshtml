@@ -1,42 +1,29 @@
-﻿@model LearnMVCInSevenDaysPractice.ViewModels.EmployeeListViewModel
+﻿@using LearnMVCInSevenDaysPractice.ViewModels
+@model EmployeeListViewModel
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/MyLayout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>MyView</title>
-</head>
-<body>
+@section TitleSection{
+    MyView
+}
+@section ContentBody{
     <div>
-        <div style="text-align:right">
-            Hello, @Model.UserName
-            <a href="@Url.Action("Logout", "Authentication")">Logout</a>
-        </div>
-
-        <hr />
-        Welcome to MVC 5 Step By Step Learning <br />
-        <b>Employee Details</b> <br />
-        @{Html.RenderAction("GetAddNewLink"); }
-        <hr />
-        @foreach (var item in Model.Employees)
-        {
-            <div>
-                Employee Name: @item.EmployeeFullName<br />
-
-
-                <span style="background-color: @item.SalaryColor">
-                    Employee Salary: @item.Salary;
-                </span>
-            </div>
-            <hr />
+        @{
+            Html.RenderAction("GetAddNewLink");
         }
+        <table border="1">
+            <tr>
+                <th>Employee Name</th>
+                <th>Salary</th>
+            </tr>
+            @foreach (var item in Model.Employees)
+            {
+                <tr>
+                    <td>@item.EmployeeFullName</td>
+                    <td style="background-color:@item.SalaryColor">@item.Salary</td>
+                </tr>
+}
+        </table>
     </div>
-    @{ 
-        Html.RenderPartial("Footer", Model.FooterData);
-    }
-</body>
-</html>
+}

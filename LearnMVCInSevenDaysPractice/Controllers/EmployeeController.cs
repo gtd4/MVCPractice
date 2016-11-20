@@ -17,11 +17,11 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 			return "What Up";
 		}
 		[Authorize]
+		[HeaderFooterFilter]
 		public ActionResult Index()
 		{
 
 			var employeeListViewModel = new EmployeeListViewModel();
-			employeeListViewModel.UserName = User.Identity.Name;
 
 			EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
 			List<Employee> employees = empBal.GetEmployees();
@@ -44,21 +44,21 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 				empViewModels.Add(empViewModel);
 			}
 			employeeListViewModel.Employees = empViewModels;
-			employeeListViewModel.FooterData = new FooterViewModel();
-			employeeListViewModel.FooterData.CompanyName = "StepByStepschools";
-			employeeListViewModel.FooterData.Year = DateTime.Now.Year.ToString();
-
+			
 			return View("Index", employeeListViewModel);
 		}
 
 		[AdminFilter]
+		[HeaderFooterFilter]
 		public ActionResult AddNew()
 		{
-			return View("CreateEmployee", new CreateEmployeeViewModel());
+			CreateEmployeeViewModel employeeListViewModel = new CreateEmployeeViewModel();
+			return View("CreateEmployee", employeeListViewModel);
 		}
 
 		[AdminFilter]
 		[ValidateAntiForgeryToken]
+		[HeaderFooterFilter]
 		public ActionResult SaveEmployee(Employee e, string BtnSubmit)
 		{
 
@@ -84,6 +84,7 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 						{
 							vm.Salary = ModelState["Salary"].Value.AttemptedValue;
 						}
+						
 						return View("CreateEmployee", vm);
 					}
 				case "Cancel":
