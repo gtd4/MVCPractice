@@ -5,10 +5,9 @@ using System.Web;
 
 namespace LearnMVCInSevenDaysPractice.ViewModels
 {
-	public class EmployeeListViewModel
+	public class BaseViewModel
 	{
-		public List<EmployeeViewModel> Employees { get; set; }
-		
+		public string UserName { get; set; }
+		public FooterViewModel FooterData { get; set; }
 	}
-
 }

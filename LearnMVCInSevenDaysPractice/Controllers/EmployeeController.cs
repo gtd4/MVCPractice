@@ -1,4 +1,5 @@
-﻿using LearnMVCInSevenDaysPractice.Models;
+﻿using LearnMVCInSevenDaysPractice.Filters;
+using LearnMVCInSevenDaysPractice.Models;
 using LearnMVCInSevenDaysPractice.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -50,11 +51,14 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 			return View("Index", employeeListViewModel);
 		}
 
+		[AdminFilter]
 		public ActionResult AddNew()
 		{
 			return View("CreateEmployee", new CreateEmployeeViewModel());
 		}
 
+		[AdminFilter]
+		[ValidateAntiForgeryToken]
 		public ActionResult SaveEmployee(Employee e, string BtnSubmit)
 		{
 
