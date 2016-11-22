@@ -37,5 +37,12 @@ namespace LearnMVCInSevenDaysPractice.Models
 			}
 			return UserStatus.NonAuthenticatedUser;
 		}
+
+		public void UploadEmployess(List<Employee> employees)
+		{
+			var salesDal = new SalesERPDAL();
+			salesDal.Employees.AddRange(employees);
+			salesDal.SaveChanges();
+		}
 	}
 }
