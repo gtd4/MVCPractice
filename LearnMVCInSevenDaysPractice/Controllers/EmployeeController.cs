@@ -16,8 +16,11 @@ namespace LearnMVCInSevenDaysPractice.Controllers
 		{
 			return "What Up";
 		}
+
+		[Route("Employee/List")]
 		[Authorize]
 		[HeaderFooterFilter]
+		
 		public ActionResult Index()
 		{
 

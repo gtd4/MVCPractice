@@ -13,6 +13,22 @@ namespace LearnMVCInSevenDaysPractice
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			routes.MapMvcAttributeRoutes();
+
+			routes.MapRoute(
+				name: "Upload",
+				url: "Employee/BulkUpload",
+				defaults: new { controller = "BulkUpload", action = "Index" }
+				);
+
+			routes.MapRoute(
+				name: "Add-New",
+				url: "Add-New/Employee",
+				defaults: new { controller = "Employee", action = "AddNew" }
+
+
+				);
+
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
