@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using LearnMVCInSevenDaysPractice.DataAccessLayer;
 using LearnMVCInSevenDays.Models;
-using LearnMVCInSevenDaysPractice.Filters;
+
 
 namespace LearnMVCInSevenDaysPractice.Models
 {

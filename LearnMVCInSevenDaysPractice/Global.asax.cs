@@ -1,4 +1,4 @@
-﻿using LearnMVCInSevenDaysPractice.DataAccessLayer;
+﻿using BusinessLayer;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,7 +18,7 @@ namespace LearnMVCInSevenDaysPractice
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
-			Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SalesERPDAL>());
+			BusinessSettings.SetBusiness();
 		}
 	}
 }
